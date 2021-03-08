@@ -11,17 +11,20 @@ def trouverMasseVolume(a = 3, b = 2, c = 5, mv = 16):
     mass = mv * volume
     return mass, volume 
 
-def frequence(sentence: str) -> dict:
-    frequency = dict()
-    for letter in sentence:
-        frequency[letter] = sentence.count(letter)
+def freq(sentence):
+    count = {}
+    for l in sentence:
+        if l in count:
+            count[l] += 1
+        else:
+            count[l] = 1
+    count = {k: v for k, v in sorted(count.items(), key=lambda item: item[1], reverse=True)}
+    for i in count.items():
+        if i[1] >= 5:
+            count[i[0]] = i[1]
+    return count
 
-    sorted_keys = sorted(frequency, key=frequency.__getitem__, reverse=True)
-    for key in sorted_keys:
-        if frequency[key] > 5:
-            print(f"Le caractère {key} revient {frequency[key]} fois.")
-
-    return frequency
+x = lambda dic : "La lettre la plus férquente est " + list(dic.keys())[0]
 
 def tree(len, t):
     if len > 5:
@@ -68,7 +71,7 @@ def adn():
 
 if __name__ == '__main__':
     # TODO: Appelez vos fonctions ici
-    # print(trouverMasseVolume(2,4,5,5))
-    # print(frequence("salut les amis"))
-    # drawTree()
+    print(trouverMasseVolume(2,4,5,5))
+    print(x(freq("salut les amis")))
+    drawTree()
     adn()
